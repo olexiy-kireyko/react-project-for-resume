@@ -1,0 +1,26 @@
+.movies_page_btn {
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin: 10px 0 10px 20px;
+  padding: 6px 10px;
+  width: 120px;
+  text-align: center;
+}
+
+.movies_page_btn:hover {
+  text-shadow: 1px 2px 2px;
+}
+
+.movies_page_inp {
+  border: 1px solid grey;
+  border-radius: 8px;
+  margin: 10px 0 10px 20px;
+  padding: 6px 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.movies_page_inp:hover {
+  box-shadow: 1px 2px 2px;
+}

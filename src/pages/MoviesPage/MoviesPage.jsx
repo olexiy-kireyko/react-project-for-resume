@@ -1,31 +1,66 @@
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
+import Navigation from "../../components/Navigation/Navigation";
+import { useSearchParams } from "react-router-dom";
+import { getSearchFilms } from "../../films-api";
+import s from "./MoviesPage.module.css";
 
-export default function MoviesPage({ getSearchFilm, searchFilm }) {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
+export default function MoviesPage() {
+  const [searchFilm, setSearchFilm] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("e.target.value", e.target.elements.searchName.value);
     const searchValue = e.target.elements.searchName.value.trim();
 
     if (searchValue === "") {
       alert("bad request");
+      setSearchFilm([]);
+
       return;
     }
-    getSearchFilm(searchValue.toLowerCase());
+    setSearchFilm(null);
+    setSearchParams({ query: searchValue.toLowerCase() });
     e.target.reset();
   };
+
+  useEffect(() => {
+    async function getFilms() {
+      if (!query) {
+        return;
+      }
+      try {
+        const response = await getSearchFilms(query);
+        if (response.length === 0) {
+          setSearchFilm([]);
+          alert("Films not exist. Change your query.");
+          return;
+        }
+        setSearchFilm(response);
+      } catch (error) {
+        alert(error);
+      }
+    }
+    getFilms();
+  }, [query]);
+
   return (
     <>
-      <p>MoviesPage</p>
+      <Navigation />
+
       <form onSubmit={handleSubmit}>
-        <input type="text" name="searchName" id="" />
-        <button type="submit">search</button>
+        <input
+          className={s.movies_page_inp}
+          type="text"
+          name="searchName"
+          id=""
+        />
+        <button className={s.movies_page_btn} type="submit">
+          search
+        </button>
       </form>
-      {searchFilm.length > 0 && (
-        <MovieList films={searchFilm} location={location} />
-      )}
+      {searchFilm ? <MovieList films={searchFilm} /> : <div>Loading...</div>}
     </>
   );
 }

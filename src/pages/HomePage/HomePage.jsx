@@ -1,15 +1,34 @@
-// import getFilms from "../../films-api";
-
-// import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
+import Navigation from "../../components/Navigation/Navigation";
+import s from "./HomePage.module.css";
+import { getHomePageFilms } from "../../films-api";
 
-export default function HomePage({ films }) {
-  const location = useLocation();
+export default function HomePage() {
+  const [homePageFilms, setHomePageFilms] = useState(null);
+
+  useEffect(() => {
+    async function fetchFilms() {
+      try {
+        const response = await getHomePageFilms();
+        setHomePageFilms(response);
+      } catch (error) {
+        alert(error);
+      }
+    }
+    fetchFilms();
+  }, []);
+
   return (
     <>
-      <h3>Trending today</h3>
-      <MovieList films={films} location={location} />
+      <Navigation />
+
+      <h3 className={s.home_page_title}>Trending today</h3>
+      {homePageFilms ? (
+        <MovieList films={homePageFilms} />
+      ) : (
+        <div>Loading...</div>
+      )}
     </>
   );
 }

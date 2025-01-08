@@ -1,0 +1,12 @@
+.movie_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+  margin-left: 100px;
+  list-style: disc;
+}
+
+.movie_list_item:hover {
+  text-shadow: 1px 2px 2px;
+}

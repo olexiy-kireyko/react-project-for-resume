@@ -1,28 +1,48 @@
-// https://api.themoviedb.org/3/movie/{movie_id}/credits
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getCastById } from "../../films-api";
+import s from "./MovieCast.module.css";
 
-// import { useEffect } from "react";
-// import { useParams } from "react-router-dom";
+export default function MovieCast() {
+  const { movieId } = useParams();
+  const [castFilmById, setCastFilmById] = useState(null);
 
-export default function MovieCast({ castFilmById }) {
-  // const { movieId } = useParams();
-  // useEffect(() => {
-  //   setFilmId(movieId);
-  // }, [movieId, setFilmId]);
+  useEffect(() => {
+    const getCast = async () => {
+      try {
+        const response = await getCastById(movieId);
+        setCastFilmById(response);
+      } catch (error) {
+        alert(error);
+      }
+    };
+    getCast();
+  }, [movieId]);
+
+  if (!castFilmById) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <p>MovieCast</p>
-      <ul>
-        {castFilmById.map((item) => {
-          return (
-            <li key={item.id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
-                alt={item.character}
-              />
-              name: {item.name} <p>character:{item.character} </p>
-            </li>
-          );
-        })}
+      <ul className={s.movie_cast_list}>
+        {castFilmById.length > 0 ? (
+          castFilmById.map((item) => {
+            return (
+              <li className={s.movie_cast} key={item.id}>
+                <img
+                  className={s.movie_cast_img}
+                  src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+                  alt={item.character}
+                />
+                <p>name: {item.name} </p>
+                <p>character: {item.character} </p>
+              </li>
+            );
+          })
+        ) : (
+          <div>There are no cast in this movie...</div>
+        )}
       </ul>
     </>
   );
