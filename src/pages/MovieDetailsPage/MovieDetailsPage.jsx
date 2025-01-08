@@ -33,6 +33,9 @@ export default function MovieDetailsPage() {
     );
   }
 
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
+
   return (
     <>
       <Navigation />
@@ -44,7 +47,11 @@ export default function MovieDetailsPage() {
         <div className={s.movie_maindetails_wrapper}>
           <img
             className={s.movie_img}
-            src={`https://image.tmdb.org/t/p/w500${filmById.backdrop_path}`}
+            src={
+              filmById.backdrop_path
+                ? `https://image.tmdb.org/t/p/w500${filmById.backdrop_path}`
+                : defaultImg
+            }
             alt={filmById.title}
           />
           <div className={s.movie_infodetails_wrapper}>
