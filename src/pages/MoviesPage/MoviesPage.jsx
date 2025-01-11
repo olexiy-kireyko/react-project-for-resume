@@ -4,6 +4,8 @@ import Navigation from "../../components/Navigation/Navigation";
 import { useSearchParams } from "react-router-dom";
 import { getSearchFilms } from "../../films-api";
 import s from "./MoviesPage.module.css";
+import Loading from "../../components/Loading/Loading";
+import { toast } from "react-hot-toast";
 
 export default function MoviesPage() {
   const [searchFilm, setSearchFilm] = useState([]);
@@ -15,8 +17,8 @@ export default function MoviesPage() {
     const searchValue = e.target.elements.searchName.value.trim();
 
     if (searchValue === "") {
-      alert("bad request");
-      setSearchFilm([]);
+      toast.error("bad request");
+      // setSearchFilm([]);
 
       return;
     }
@@ -34,12 +36,12 @@ export default function MoviesPage() {
         const response = await getSearchFilms(query);
         if (response.length === 0) {
           setSearchFilm([]);
-          alert("Films not exist. Change your query.");
+          toast.error("Films not exist. Change your query.");
           return;
         }
         setSearchFilm(response);
       } catch (error) {
-        alert(error);
+        toast.error(error.message);
       }
     }
     getFilms();
@@ -49,7 +51,7 @@ export default function MoviesPage() {
     <>
       <Navigation />
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={s.movies_page_form}>
         <input
           className={s.movies_page_inp}
           type="text"
@@ -60,7 +62,20 @@ export default function MoviesPage() {
           search
         </button>
       </form>
-      {searchFilm ? <MovieList films={searchFilm} /> : <div>Loading...</div>}
+      {searchFilm ? (
+        searchFilm.length > 0 && (
+          <div
+            className={s.movies_page_home_page_wrapper}
+            style={{
+              background: `linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(https://image.tmdb.org/t/p/original${searchFilm[0].backdrop_path}) center/cover fixed`,
+            }}
+          >
+            <MovieList films={searchFilm} />
+          </div>
+        )
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

@@ -1,7 +1,11 @@
+.home_page_wrapper {
+  background-repeat: no-repeat;
+}
+
 .home_page_title {
   font-weight: 500;
-  font-size: 24px;
-  margin-top: 24px;
-  margin-bottom: 16px;
+  font-size: 28px;
+  padding-top: 24px;
+  margin-bottom: -66px;
   margin-left: 60px;
 }

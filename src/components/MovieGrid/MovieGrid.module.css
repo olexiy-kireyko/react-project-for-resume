@@ -1,0 +1,30 @@
+.movie_grid_wrapper {
+  text-align: center;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.movie_grid_list {
+  display: grid;
+  justify-content: center;
+
+  gap: 20px;
+  grid-template-columns: 16% 16% 16%;
+  grid-template-rows: repeat(6, 48px);
+}
+.movie_grid_item {
+  box-shadow: 0 3px 16px 4px rgba(29, 51, 107, 0.1);
+  background-color: #fff;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.movie_grid_img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}

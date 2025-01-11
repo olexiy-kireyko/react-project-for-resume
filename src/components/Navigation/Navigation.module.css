@@ -1,12 +1,19 @@
 .navigation {
-  background-color: aqua;
+  background: radial-gradient(
+    circle,
+    rgba(142, 214, 214, 0.7987570028011204) 15%,
+    rgba(9, 17, 126, 1) 88%,
+    rgba(2, 0, 36, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
   display: flex;
-  gap: 20px;
-  padding: 20px 30px;
+  gap: 28px;
+  padding: 10px 30px 10px 60px;
 }
 
 .navigation_link {
   font-weight: 500;
+  font-size: 30px;
 }
 
 .navigation_link:hover {

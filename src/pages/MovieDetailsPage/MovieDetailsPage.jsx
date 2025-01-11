@@ -1,9 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
-import { BsBoxArrowLeft } from "react-icons/bs";
 import Navigation from "../../components/Navigation/Navigation";
 import { getFilmById } from "../../films-api";
 import s from "./MovieDetailsPage.module.css";
+import { FcUndo } from "react-icons/fc";
+import { FcExpand } from "react-icons/fc";
+import clsx from "clsx";
+import Loading from "../../components/Loading/Loading";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -22,13 +25,18 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const location = useLocation();
+  // console.log("location", location);
+
   const backLink = location.state ?? "/movies";
+
+  const markCast = location.pathname.includes("cast") ? true : false;
+  const markReviews = location.pathname.includes("reviews") ? true : false;
 
   if (!filmById) {
     return (
       <>
         <Navigation />
-        <div>Loading...</div>
+        <Loading />
       </>
     );
   }
@@ -40,7 +48,7 @@ export default function MovieDetailsPage() {
     <>
       <Navigation />
       <Link to={backLink} className={s.movie_details_backlink}>
-        <BsBoxArrowLeft />
+        <FcUndo />
         Go back
       </Link>
       <div className={s.movie_details_wrapper}>
@@ -72,19 +80,39 @@ export default function MovieDetailsPage() {
         </div>
         <p className={s.movie_add_info}>Additional information</p>
         <ul className={s.movie_add_info_list}>
-          <li className={s.movie_add_info_link}>
-            <Link to="cast" state={location.state}>
+          <li>
+            <Link
+              to="cast"
+              state={location.state}
+              className={s.movie_add_info_link}
+            >
+              <FcExpand
+                className={clsx(
+                  !markCast ? s.movie_add_info_svg : s.movie_add_info_svg_open
+                )}
+              />
               cast
             </Link>
           </li>
-          <li className={s.movie_add_info_link}>
-            <Link to="reviews" state={location.state}>
+          <li>
+            <Link
+              to="reviews"
+              state={location.state}
+              className={s.movie_add_info_link}
+            >
+              <FcExpand
+                className={clsx(
+                  !markReviews
+                    ? s.movie_add_info_svg
+                    : s.movie_add_info_svg_open
+                )}
+              />
               reviews
             </Link>
           </li>
         </ul>
       </div>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
     </>

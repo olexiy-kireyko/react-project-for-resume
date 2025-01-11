@@ -14,6 +14,9 @@ export default function Navigation() {
       <NavLink to="/movies" className={buildLinkClass}>
         Movies
       </NavLink>
+      <NavLink to="/about" className={buildLinkClass}>
+        About
+      </NavLink>
     </nav>
   );
 }

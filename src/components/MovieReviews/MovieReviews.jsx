@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsById } from "../../films-api";
 import s from "./MovieReviews.module.css";
+import { FcVoicePresentation } from "react-icons/fc";
+import Loading from "../Loading/Loading";
 
 export default function MovieReviews() {
   const { movieId } = useParams();
@@ -20,7 +22,7 @@ export default function MovieReviews() {
   }, [movieId]);
 
   if (!reviewsFilmById) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -29,8 +31,9 @@ export default function MovieReviews() {
         {reviewsFilmById.length > 0 ? (
           reviewsFilmById.map((item) => {
             return (
-              <li key={item.id}>
+              <li key={item.id} className={s.movie_reviews_item}>
                 <div className={s.movie_reviews_title}>
+                  <FcVoicePresentation className={s.movie_reviews_title_svg} />
                   author: {item.author}
                 </div>
                 <div>{item.content}</div>

@@ -1,26 +1,43 @@
+.movies_page_home_page_wrapper {
+  background-repeat: no-repeat;
+}
+
+.movies_page_form {
+  margin-bottom: -60px;
+}
+
 .movies_page_btn {
   align-items: center;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   border-radius: 8px;
   margin: 10px 0 10px 20px;
   padding: 6px 10px;
   width: 120px;
   text-align: center;
+
+  box-shadow: rgba(77, 47, 209, 0.45) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  transition: transform 300ms linear;
 }
 
 .movies_page_btn:hover {
   text-shadow: 1px 2px 2px;
+  transform: scale(1.03, 1.03);
 }
 
 .movies_page_inp {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   border-radius: 8px;
   margin: 10px 0 10px 20px;
   padding: 6px 10px;
   width: 200px;
   text-align: center;
+  box-shadow: rgba(77, 47, 209, 0.45) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .movies_page_inp:hover {
   box-shadow: 1px 2px 2px;
+  box-shadow: rgba(77, 47, 209, 0.45) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
