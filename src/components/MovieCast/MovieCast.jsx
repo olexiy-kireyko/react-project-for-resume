@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCastById } from "../../films-api";
 import s from "./MovieCast.module.css";
@@ -7,11 +7,25 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import clsx from "clsx";
-import { FcLeft, FcRight } from "react-icons/fc";
+// import { FcLeft, FcRight } from "react-icons/fc";
 
 export default function MovieCast() {
+  const galleryCast = useRef();
+
   const { movieId } = useParams();
   const [castFilmById, setCastFilmById] = useState(null);
+
+  useEffect(() => {
+    if (!castFilmById) {
+      return;
+    } else {
+      galleryCast.current.scrollIntoView({
+        block: "end",
+        inline: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [castFilmById]);
 
   useEffect(() => {
     const getCast = async () => {
@@ -34,8 +48,8 @@ export default function MovieCast() {
 
   let settings = {
     dots: true,
-    nextArrow: <FcRight />,
-    prevArrow: <FcLeft />,
+    // nextArrow: <FcRight />,
+    // prevArrow: <FcLeft />,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
@@ -72,7 +86,10 @@ export default function MovieCast() {
   return (
     <>
       {castFilmById.length > 0 ? (
-        <div className={clsx("slider-container", s.movie_cast_list)}>
+        <div
+          className={clsx("slider-container", s.movie_cast_list)}
+          ref={galleryCast}
+        >
           <Slider {...settings}>
             {castFilmById.map((item) => {
               return (
