@@ -9,3 +9,11 @@
   margin-bottom: -66px;
   margin-left: 60px;
 }
+
+@media (max-width: 768px) {
+  .home_page_title {
+    margin-left: 24px;
+    padding-top: 60px;
+    margin-bottom: -106px;
+  }
+}

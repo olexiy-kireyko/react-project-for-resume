@@ -2,7 +2,6 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  /* border: 1px solid grey; */
   border-radius: 16px;
   margin: 10px 0 10px 20px;
   padding: 6px 10px;
@@ -73,7 +72,6 @@
 }
 
 .movie_add_info_list {
-  /* list-style-type: disc; */
   margin-left: 40px;
   display: flex;
   gap: 140px;
@@ -87,18 +85,38 @@
   font-style: italic;
   padding: 4px 20px;
 }
+
 .movie_add_info_svg {
   transform: rotate(-90deg);
   transition: 300ms transform linear;
 }
+
 .movie_add_info_svg_open {
   transform: rotate(0deg);
   transform: translateY(7px);
 }
+
 .movie_add_info_link:hover {
   text-shadow: 1px 2px 2px;
 }
+
 .movie_add_info_link:hover .movie_add_info_svg {
   transform: rotate(0deg);
   transform: translateY(7px);
+}
+
+@media (max-width: 768px) {
+  .movie_maindetails_wrapper {
+    flex-direction: column;
+  }
+  .movie_img {
+    max-width: 80%;
+  }
+  .movie_genres {
+    flex-wrap: wrap;
+  }
+  .movie_add_info_list {
+    margin-left: 24px;
+    gap: 24px;
+  }
 }

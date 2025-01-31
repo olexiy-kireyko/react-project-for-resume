@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
-import Navigation from "../../components/Navigation/Navigation";
-import { getFilmById } from "../../films-api";
-import s from "./MovieDetailsPage.module.css";
 import { FcUndo } from "react-icons/fc";
 import { FcExpand } from "react-icons/fc";
 import clsx from "clsx";
+import Navigation from "../../components/Navigation/Navigation";
 import Loading from "../../components/Loading/Loading";
+import { getFilmById } from "../../films-api";
+import s from "./MovieDetailsPage.module.css";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -25,7 +25,6 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const location = useLocation();
-  // console.log("location", location);
 
   const backLink = location.state ?? "/movies";
 

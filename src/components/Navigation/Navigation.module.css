@@ -23,3 +23,21 @@
 .active {
   color: chocolate;
 }
+
+@media (max-width: 768px) and (min-width: 368px) {
+  .navigation {
+    gap: 12px;
+    padding: 12px 12px 12px 32px;
+  }
+}
+@media (max-width: 367px) {
+  .navigation {
+    padding: 12px;
+    gap: 0px;
+    justify-content: space-around;
+  }
+  .navigation_link {
+    font-weight: 400;
+    font-size: 26px;
+  }
+}

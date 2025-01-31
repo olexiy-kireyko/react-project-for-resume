@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import MovieList from "../../components/MovieList/MovieList";
 import Navigation from "../../components/Navigation/Navigation";
+import Loading from "../../components/Loading/Loading";
 import s from "./HomePage.module.css";
 import { getHomePageFilms } from "../../films-api";
-import Loading from "../../components/Loading/Loading";
-import { toast } from "react-hot-toast";
 
 export default function HomePage() {
   const [homePageFilms, setHomePageFilms] = useState(null);

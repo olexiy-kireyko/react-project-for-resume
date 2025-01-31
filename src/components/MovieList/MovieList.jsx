@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import s from "./MovieList.module.css";
 import { FcAdvance } from "react-icons/fc";
+import s from "./MovieList.module.css";
 
 export default function MovieList({ films }) {
   const location = useLocation();

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import clsx from "clsx";
 import Loading from "../Loading/Loading";
 import s from "./MovieGrid.module.css";
 import { fetchImages } from "../../about-api";
-import clsx from "clsx";
-import { toast } from "react-hot-toast";
 
 const MovieGrid = () => {
   const [images, setImages] = useState(null);
@@ -12,9 +12,7 @@ const MovieGrid = () => {
     async function getImage() {
       try {
         const response = await fetchImages();
-
         setImages(response.results);
-        // console.log("images", response.results);
       } catch (error) {
         toast.error(error.message);
       }

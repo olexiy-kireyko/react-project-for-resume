@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import Loading from "../../components/Loading/Loading";
 import MovieGrid from "../../components/MovieGrid/MovieGrid";
 import Navigation from "../../components/Navigation/Navigation";
 import s from "./AboutPage.module.css";
 import { getHomePageFilms } from "../../films-api";
-import { toast } from "react-hot-toast";
 
 const AboutPage = () => {
   const [aboutPageFilms, setAboutPageFilms] = useState(null);
@@ -14,7 +14,6 @@ const AboutPage = () => {
       try {
         const response = await getHomePageFilms();
         setAboutPageFilms(response);
-        // console.log("response about page", response);
       } catch (error) {
         toast.error(error.message);
       }

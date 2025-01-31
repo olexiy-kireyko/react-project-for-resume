@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FcVoicePresentation } from "react-icons/fc";
 import { getReviewsById } from "../../films-api";
 import s from "./MovieReviews.module.css";
-import { FcVoicePresentation } from "react-icons/fc";
 import Loading from "../Loading/Loading";
 
 export default function MovieReviews() {

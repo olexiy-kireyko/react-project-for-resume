@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import MovieList from "../../components/MovieList/MovieList";
 import Navigation from "../../components/Navigation/Navigation";
-import { useSearchParams } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
 import { getSearchFilms } from "../../films-api";
 import s from "./MoviesPage.module.css";
-import Loading from "../../components/Loading/Loading";
-import { toast } from "react-hot-toast";
 
 export default function MoviesPage() {
   const [searchFilm, setSearchFilm] = useState([]);
@@ -18,8 +18,6 @@ export default function MoviesPage() {
 
     if (searchValue === "") {
       toast.error("bad request");
-      // setSearchFilm([]);
-
       return;
     }
     setSearchFilm(null);
@@ -56,7 +54,7 @@ export default function MoviesPage() {
           className={s.movies_page_inp}
           type="text"
           name="searchName"
-          id=""
+          placeholder="enter the name of movie"
         />
         <button className={s.movies_page_btn} type="submit">
           search

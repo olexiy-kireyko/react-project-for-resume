@@ -1,31 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import Slider from "react-slick";
+import clsx from "clsx";
 import { getCastById } from "../../films-api";
 import s from "./MovieCast.module.css";
 import Loading from "../Loading/Loading";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import clsx from "clsx";
-// import { FcLeft, FcRight } from "react-icons/fc";
 
 export default function MovieCast() {
   const galleryCast = useRef();
 
   const { movieId } = useParams();
   const [castFilmById, setCastFilmById] = useState(null);
-
-  useEffect(() => {
-    if (!castFilmById) {
-      return;
-    } else {
-      galleryCast.current.scrollIntoView({
-        block: "end",
-        inline: "nearest",
-        behavior: "smooth",
-      });
-    }
-  }, [castFilmById]);
 
   useEffect(() => {
     const getCast = async () => {
@@ -39,6 +26,18 @@ export default function MovieCast() {
     getCast();
   }, [movieId]);
 
+  useEffect(() => {
+    if (!castFilmById) {
+      return;
+    } else {
+      galleryCast.current.scrollIntoView({
+        block: "end",
+        inline: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [castFilmById]);
+
   if (!castFilmById) {
     return <Loading />;
   }
@@ -48,8 +47,6 @@ export default function MovieCast() {
 
   let settings = {
     dots: true,
-    // nextArrow: <FcRight />,
-    // prevArrow: <FcLeft />,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
@@ -73,23 +70,13 @@ export default function MovieCast() {
           initialSlide: 2,
         },
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
     ],
   };
 
   return (
     <>
       {castFilmById.length > 0 ? (
-        <div
-          className={clsx("slider-container", s.movie_cast_list)}
-          ref={galleryCast}
-        >
+        <div className={clsx("slider-container", s.movie_cast_list)}>
           <Slider {...settings}>
             {castFilmById.map((item) => {
               return (
@@ -110,6 +97,7 @@ export default function MovieCast() {
                     <span className={s.movie_cast_span}>character:</span>{" "}
                     {item.character}{" "}
                   </p>
+                  <div></div>
                 </div>
               );
             })}
@@ -118,6 +106,7 @@ export default function MovieCast() {
       ) : (
         <div>There are no cast in this movie...</div>
       )}
+      <div ref={galleryCast}></div>
     </>
   );
 }

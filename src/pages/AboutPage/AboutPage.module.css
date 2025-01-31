@@ -2,13 +2,34 @@
   margin-bottom: -132px;
   padding: 24px;
 }
+
+@media (max-width: 892px) and (min-width: 490px) {
+  .about_page_title_wrapper {
+    margin-bottom: -162px;
+  }
+}
+
+@media (max-width: 489px) and (min-width: 340px) {
+  .about_page_title_wrapper {
+    margin-bottom: -182px;
+  }
+}
+
+@media (max-width: 339px) and (min-width: 300px) {
+  .about_page_title_wrapper {
+    margin-bottom: -206px;
+  }
+}
+
 .about_page_title {
   font-size: 24px;
   font-weight: 600;
 }
+
 .about_page_text {
   padding-bottom: 24px;
 }
+
 .about_page_wrapper {
   padding-top: 84px;
 }
