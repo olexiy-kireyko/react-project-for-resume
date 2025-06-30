@@ -1,4 +1,5 @@
 .about_page_title_wrapper {
+ 
   margin-bottom: -132px;
   padding: 24px;
 }
@@ -31,5 +32,7 @@
 }
 
 .about_page_wrapper {
+   height: 100vh;
   padding-top: 84px;
+  overflow: hidden;
 }
